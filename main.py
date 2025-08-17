@@ -1,4 +1,7 @@
-# That greeting comes from importing pygame. Hide it by setting an env var before pygame is imported.
+#main.py module
+# 
+# 
+# # That greeting comes from importing pygame. Hide it by setting an env var before pygame is imported.
 import os
 os.environ["PYGAME_HIDE_SUPPORT_PROMPT"] = "1"
 
@@ -7,12 +10,14 @@ os.environ["PYGAME_HIDE_SUPPORT_PROMPT"] = "1"
 # throughout this file
 import pygame
 from constants import *
+from player import Player
 
 
 
 def main():
     pygame.init()
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+    p1 = Player(x = SCREEN_WIDTH / 2, y = SCREEN_HEIGHT / 2)
     print("Starting Asteroids!")
     print(f"Screen width: {SCREEN_WIDTH}")
     print(f"Screen height: {SCREEN_HEIGHT}")
@@ -25,8 +30,10 @@ def main():
                 return
         screen.fill((0, 0, 0))
 
+        p1.draw(screen)
+
         pygame.display.flip()
-        game_time.tick(60)
+        # game_time.tick(60)
         dt = game_time.tick(60)/1000
 
 if __name__ == "__main__":
