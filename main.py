@@ -11,6 +11,8 @@ os.environ["PYGAME_HIDE_SUPPORT_PROMPT"] = "1"
 import pygame
 from constants import *
 from player import Player
+from asteroid import Asteroid
+from asteroidfield import AsteroidField
 
 
 
@@ -19,8 +21,18 @@ def main():
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
     updatable = pygame.sprite.Group()
     drawable = pygame.sprite.Group()
+    asteroids = pygame.sprite.Group()
+    asteroidfield = pygame.sprite.Group()
+
+    AsteroidField.containers = (asteroidfield, updatable)
+    Asteroid.containers = (asteroids, updatable, drawable)
     Player.containers = (updatable, drawable)
+
     p1 = Player(x = SCREEN_WIDTH / 2, y = SCREEN_HEIGHT / 2)
+    asteroidfield_obj = AsteroidField()
+    print("updatable:", len(updatable), "drawable:", len(drawable),
+      "asteroids:", len(asteroids), "field:", len(asteroidfield))
+# Expect: updatable >= 2 (player + field), drawable >= 1 (player)
     print("Starting Asteroids!")
     print(f"Screen width: {SCREEN_WIDTH}")
     print(f"Screen height: {SCREEN_HEIGHT}")
