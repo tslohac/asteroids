@@ -53,6 +53,7 @@ def main():
         screen.fill((0, 0, 0))
         dt = game_time.tick(60)/1000
         updatable.update(dt)
+        
 
         for ast in asteroids:
             if ast.check_collision(p1):

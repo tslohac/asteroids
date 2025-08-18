@@ -14,6 +14,7 @@ class Player(CircleShape):
         self.y = y
         self.radius = PLAYER_RADIUS
         self.rotation = 0
+        self.shoot_timer = 0
 
     # in the player class
     def triangle(self):
@@ -40,8 +41,12 @@ class Player(CircleShape):
             self.move(dt)
         if keys[pygame.K_s]:
             self.move(-dt)
-        if keys[pygame.K_SPACE]:
+
+        if self.shoot_timer > 0:
+            self.shoot_timer = max(0, self.shoot_timer - dt)
+        if keys[pygame.K_SPACE] and self.shoot_timer == 0:
             self.shoot()
+            self.shoot_timer = PLAYER_SHOOT_COOLDOWN
 
 
     def move(self, dt):
