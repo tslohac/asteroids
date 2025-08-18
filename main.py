@@ -13,6 +13,7 @@ from constants import *
 from player import Player
 from asteroid import Asteroid
 from asteroidfield import AsteroidField
+import sys
 
 
 
@@ -49,6 +50,13 @@ def main():
         screen.fill((0, 0, 0))
         dt = game_time.tick(60)/1000
         updatable.update(dt)
+
+        for ast in asteroids:
+            if ast.check_collision(p1):
+                print("Game over!")
+                pygame.quit()
+                sys.exit()
+
         for obj in drawable:
             obj.draw(screen)
 
