@@ -61,6 +61,11 @@ def main():
                 pygame.quit()
                 sys.exit()
 
+            for bullet in shots:
+                if bullet.check_collision(ast):
+                    bullet.kill()
+                    ast.kill()
+
         for obj in drawable:
             obj.draw(screen)
 
